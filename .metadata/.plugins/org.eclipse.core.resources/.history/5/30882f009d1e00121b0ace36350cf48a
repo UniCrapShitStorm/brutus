@@ -10,6 +10,7 @@ import java.awt.*;
 
 
 import org.omg.CORBA.SystemException;
+import build.living.SmallTent;
 
 public class EventListener implements ActionListener {
 	Field [][] field;
