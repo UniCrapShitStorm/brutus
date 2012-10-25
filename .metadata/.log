@@ -107,3 +107,21 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY org.eclipse.equinox.security 1 0 2012-10-25 16:25:23.262
 !MESSAGE New keyring password generated. 
+!SESSION 2012-10-25 17:29:12.089 -----------------------------------------------
+eclipse.buildId=I20120608-1400
+java.version=1.7.0_05
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2012-10-25 17:29:44.935
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.help.base 4 4 2012-10-25 17:31:28.631
+!MESSAGE Help documentation could not be indexed completely.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2012-10-25 17:31:28.631
+!MESSAGE Help document /org.eclipse.mylyn.help.ui/doc/notices.html cannot be opened.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-10-25 17:37:55.880
+!MESSAGE Failed to open search index.

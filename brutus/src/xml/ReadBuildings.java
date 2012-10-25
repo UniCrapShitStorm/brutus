@@ -4,26 +4,26 @@ import java.util.*;
 import org.jdom2.*;
 import org.jdom2.input.*;
 
-import buildings.Buildings;
+import buildings.BuildingsRaw;
 //import org.jdom2.output.*;
 import java.io.*;
 
 public class ReadBuildings {
-	private static List<Buildings> buildings = new ArrayList<Buildings>();
+	public static ArrayList<BuildingsRaw> buildings = new ArrayList<BuildingsRaw>();
 
 	/**
-	 * @param args
+	 * Liest alle Nutzgebaeude aus einer XML-Datei und speichert sie in einer ArrayList<Buildings>
+	 * @return alle Nutzgebaeude in einer ArrayList
 	 */
-	public static void main(String[] args) {
+	public static ArrayList<BuildingsRaw> getBuildingsFromXml() {
 
-		//Erzeugen eines JDOM-Dokuments anhand der Datei party.xml
 		SAXBuilder builder = new SAXBuilder();
-		//			XMLOutputter out = new XMLOutputter();
+//		XMLOutputter out = new XMLOutputter();
 
 		Document doc = null;
 		try {
-			doc = builder.build( "buildings.xml" );
-			//				out.output(doc, System.out);
+			doc = builder.build( "res/xml/buildings.xml" );
+// 			out.output(doc, System.out);
 		} catch (JDOMException | IOException e) {
 			e.printStackTrace();
 		}
@@ -44,13 +44,15 @@ public class ReadBuildings {
 			int maxWorkers = Integer.parseInt(building.getChildText("maxWorkers"));
 			int costs = Integer.parseInt(building.getChildText("costs"));
 
-			Buildings buildingsWithValues = new Buildings(name, sizeX, sizeY, needsStreet, initAttr, plusAttr, stepAttr, maxAttrRegion, maxWorkers, costs);
+			BuildingsRaw buildingsWithValues = new BuildingsRaw(name, sizeX, sizeY, needsStreet, initAttr, plusAttr, stepAttr, maxAttrRegion, maxWorkers, costs);
 			buildings.add(buildingsWithValues);
 		}
 
-		System.out.print("Name\tGroesse\tStrasse?\tAttr.init\tAttr.plus\tAttr.schritt\tmax.Attr.Bereich\tmax.Arbeiter\tKosten\n");
-		for (Buildings b : buildings) {
-			System.out.print(b.getName() + "\t" + b.getSizeX() + "x" + b.getSizeY() + "\t" + b.needsStreet() + "\t" + b.getInitAttr() + "\t" + b.getPlusAttr() + "\t" + b.getStepAttr() + "\t" + b.getMaxAttrRegion() + "\t" + b.getMaxWorkers() + "\t" + b.getCosts() + "\n");
-		}
+//		System.out.print("Name\tGroesse\tStrasse?\tAttr.init\tAttr.plus\tAttr.schritt\tmax.Attr.Bereich\tmax.Arbeiter\tKosten\n");
+//		for (Buildings b : buildings) {
+//			System.out.print(b.getName() + "\t" + b.getSizeX() + "x" + b.getSizeY() + "\t" + b.needsStreet() + "\t" + b.getInitAttr() + "\t" + b.getPlusAttr() + "\t" + b.getStepAttr() + "\t" + b.getMaxAttrRegion() + "\t" + b.getMaxWorkers() + "\t" + b.getCosts() + "\n");
+//		}
+		
+		return buildings;
 	}
 }

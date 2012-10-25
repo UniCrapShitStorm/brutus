@@ -1,30 +1,31 @@
 package xml;
 
 import java.util.*;
+
 import org.jdom2.*;
 import org.jdom2.input.*;
 
-import buildings.Homes;
+import buildings.HomesRaw;
 //import org.jdom2.output.*;
 
 import java.io.*;
 
 public class ReadHomes {
-	private static List<Homes> homes = new ArrayList<Homes>();
+	public static ArrayList<HomesRaw> homes = new ArrayList<HomesRaw>();
 	
 	/**
-	 * @param args
+	 * Liest alle Wohnhaeuser aus einer XML-Datei und speichert sie in einer ArrayList<Homes>
+	 * @return alle Wohnhaeuser in einer ArrayList
 	 */
-	public static void main(String[] args) {
+	public static ArrayList<HomesRaw> getHomesFromXml() {
 
-		//Erzeugen eines JDOM-Dokuments anhand der Datei party.xml
 		SAXBuilder builder = new SAXBuilder();
 //		XMLOutputter out = new XMLOutputter();
 		
 
 		Document doc = null;
 		try {
-			doc = builder.build( "homes.xml" );
+			doc = builder.build( "res/xml/homes.xml" );
 //			out.output(doc, System.out);
 		} catch (JDOMException | IOException e) {
 			e.printStackTrace();
@@ -56,13 +57,15 @@ public class ReadHomes {
 				}
 			}
 
-			Homes homeWithValues = new Homes(name, sizeX, sizeY, id, maxInhabitants, wealth, needs);
+			HomesRaw homeWithValues = new HomesRaw(name, sizeX, sizeY, id, maxInhabitants, wealth, needs);
 			homes.add(homeWithValues);
 		}
 		
-		System.out.print("ID\tName\t\t\tGroesse\tmax.Einwohner\tWohlstand\tBeduerfnisse\n");
-		for (Homes h : homes) {
-			System.out.print(h.getId() + "\t" + h.getName() + "\t\t" + h.getSizeX() + "x" + h.getSizeY() + "\t" + h.getMaxInhabitants() + "\t" + h.getWealth() + "\t" + h.getNeeds().toString() + "\n");
-		}
+//		System.out.print("ID\tName\t\t\tGroesse\tmax.Einwohner\tWohlstand\tBeduerfnisse\n");
+//		for (Homes h : homes) {
+//			System.out.print(h.getId() + "\t" + h.getName() + "\t\t" + h.getSizeX() + "x" + h.getSizeY() + "\t" + h.getMaxInhabitants() + "\t" + h.getWealth() + "\t" + h.getNeeds().toString() + "\n");
+//		}
+		
+		return homes;
 	}
 }
