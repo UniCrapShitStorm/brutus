@@ -17,34 +17,28 @@ public class InputKeyEvents extends KeyAdapter {
 		double b = pf.pixelsize*SwingGui.testfield[1].length;
 		double c = Math.sqrt(a*a+b*b);
 	
-	public void keyPressed(KeyEvent e)
-	{
+	public void keyPressed(KeyEvent e){
 			int key = e.getKeyCode();
-		if (key == KeyEvent.VK_W)
-		{
-      		if(SwingGui.playField.ngl.camy > 0)
-      		{
-      			System.out.println("UP");
-      			SwingGui.playField.ngl.camy -= 10;
-      			SwingGui.playField.ngl.canvas.repaint();
-      		}
-      	}
-      	if(key == KeyEvent.VK_S)
-      	{
+		if (key == KeyEvent.VK_W) {
+ //     		if(pf.ymapmove<0){
+      	    System.out.println("UP");
+      	    SwingGui.playField.ngl.camy -= 10;
+			SwingGui.playField.ngl.canvas.repaint();
+//      		}
+      	    }
+      	if (key == KeyEvent.VK_S) {
       		
     	      System.out.println("DOWN");
     	      SwingGui.playField.ngl.camy += 10;
     	      SwingGui.playField.ngl.canvas.repaint();
       		
-    	}
-      	if(key == KeyEvent.VK_D)
-      	{
+    	    }
+      	if (key == KeyEvent.VK_D) {
 		     System.out.println("RIGHT");
 		     SwingGui.playField.ngl.camx += 10;
 		     SwingGui.playField.ngl.canvas.repaint();
 	    }
-      	if(key == KeyEvent.VK_A)
-      	{
+      	if (key == KeyEvent.VK_A) {
  //     		double width = (a*b)/c;
  //     		if(pf.xmapmove<width){
     	      System.out.println("LEFT");

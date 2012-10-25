@@ -146,7 +146,7 @@ public class NGLManager implements GLEventListener
 			{
 				if(map[x][y] == null)
 				{
-					NGLQuad.getQuad("bin/img/gras1_klein.jpg", x*100.0f, y*100.0f, 100.0f, 100.0f, gl);
+					NGLQuad.getQuad("bin/img/erde1_klein.jpg", x*100.0f, y*100.0f, 100.0f, 100.0f, gl);
 				}
 				else if(map[x][y] instanceof Desert)
 				{
