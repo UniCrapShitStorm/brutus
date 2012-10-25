@@ -182,7 +182,7 @@ public class NGLManager implements GLEventListener
 			}
 		}
 		
-		NGLQuad.getQuad("bin/img/schild3.png", 100, 100, 232, 291, gl).isIsometric = true;
+		NGLQuad.getQuad("bin/img/lager.png", 100, 100, 480, 270, gl).isIsometric = true;
 		
 //		camx = -100;
 //		camy = 300;
