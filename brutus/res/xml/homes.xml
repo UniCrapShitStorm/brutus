@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<homes>
+	<home>
+		<id>1</id>
+		<name>Kleines Zelt</name>
+		<sizeX>1</sizeX>
+		<sizeY>1</sizeY>
+		<maxInhabitants>5</maxInhabitants>
+		<wealth>5</wealth>
+	</home>
+	<home>
+		<id>2</id>
+		<name>Großes Zelt</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>7</maxInhabitants>
+		<needs>
+			<need id="1">Wasser</need>
+		</needs>
+		<wealth>10</wealth>
+	</home>
+	<home>
+		<id>3</id>
+		<name>Kleine Hütte</name>
+		<sizeX>1</sizeX>
+		<sizeY>1</sizeY>
+		<maxInhabitants>9</maxInhabitants>
+		<needs>
+			<need id="1">1 Nahrungsmittel</need>
+		</needs>
+		<wealth>15</wealth>
+	</home>
+	<home>
+		<id>4</id>
+		<name>Große Hütte</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>11</maxInhabitants>
+		<needs>
+			<need id="1">1 Tempel</need>
+		</needs>
+		<wealth>20</wealth>
+	</home>
+	<home>
+		<id>5</id>
+		<name>Kleines Haus</name>
+		<sizeX>1</sizeX>
+		<sizeY>1</sizeY>
+		<maxInhabitants>13</maxInhabitants>
+		<needs>
+			<need id="1">Brunnen</need>
+		</needs>
+		<wealth>25</wealth>
+	</home>
+	<home>
+		<id>6</id>
+		<name>Großes Haus</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>15</maxInhabitants>
+		<needs>
+			<need id="1">Unterhaltung</need>
+		</needs>
+		<wealth>30</wealth>
+	</home>
+	<home>
+		<id>7</id>
+		<name>Kleine Casa</name>
+		<sizeX>1</sizeX>
+		<sizeY>1</sizeY>
+		<maxInhabitants>17</maxInhabitants>
+		<needs>
+			<need id="1">Schule</need>
+			<need id="2">Bibliothek</need>
+		</needs>
+		<wealth>35</wealth>
+	</home>
+	<home>
+		<id>8</id>
+		<name>Große Casa</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>19</maxInhabitants>
+		<needs>
+			<need id="1">Badehaus</need>
+			<need id="2">Geschirr</need>
+		</needs>
+		<wealth>45</wealth>
+	</home>
+	<home>
+		<id>9</id>
+		<name>Kleine Insulae</name>
+		<sizeX>1</sizeX>
+		<sizeY>1</sizeY>
+		<maxInhabitants>19</maxInhabitants>
+		<needs>
+			<need id="1">Mehr Unterhaltung</need>
+		</needs>
+		<wealth>50</wealth>
+	</home>
+	<home>
+		<id>10</id>
+		<name>Mittlere Insulae</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>20</maxInhabitants>
+		<needs>
+			<need id="1">Doktor</need>
+			<need id="2">Krankenhaus</need>
+			<need id="3">Möbel</need>
+		</needs>
+		<wealth>58</wealth>
+	</home>
+	<home>
+		<id>11</id>
+		<name>Große Insulae</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>84</maxInhabitants>
+		<needs>
+			<need id="1">Schule</need>
+			<need id="2">Bibliothek</need>
+			<need id="3">Barbier</need>
+			<need id="4">Öl</need>
+		</needs>
+		<wealth>65</wealth>
+	</home>
+	<home>
+		<id>12</id>
+		<name>Herrschaftliche Insulae</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>84</maxInhabitants>
+		<needs>
+			<need id="1">2 Nahrungsmittel</need>
+			<need id="2">mehr Unterhaltung</need>
+		</needs>
+		<wealth>80</wealth>
+	</home>
+	<home>
+		<id>13</id>
+		<name>Kleine Villa</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>40</maxInhabitants>
+		<needs>
+			<need id="1">Wein</need>
+			<need id="2">2 Tempel</need>
+		</needs>
+		<wealth>150</wealth>
+	</home>
+	<home>
+		<id>14</id>
+		<name>Mittlere Villa</name>
+		<sizeX>2</sizeX>
+		<sizeY>2</sizeY>
+		<maxInhabitants>42</maxInhabitants>
+		<needs>
+			<need id="1">Doktor</need>
+			<need id="2">Krankenhaus</need>
+		</needs>
+		<wealth>180</wealth>
+	</home>
+	<home>
+		<id>15</id>
+		<name>Große Villa</name>
+		<sizeX>3</sizeX>
+		<sizeY>3</sizeY>
+		<maxInhabitants>90</maxInhabitants>
+		<needs>
+			<need id="1">Akademie</need>
+		</needs>
+		<wealth>400</wealth>
+	</home>
+	<home>
+		<id>16</id>
+		<name>Luxus Villa</name>
+		<sizeX>3</sizeX>
+		<sizeY>3</sizeY>
+		<maxInhabitants>100</maxInhabitants>
+		<needs>
+			<need id="1">3 Nahrungsmittel</need>
+			<need id="2">3 Tempel</need>
+		</needs>
+		<wealth>600</wealth>
+	</home>
+	<home>
+		<id>17</id>
+		<name>Kleiner Palast</name>
+		<sizeX>3</sizeX>
+		<sizeY>3</sizeY>
+		<maxInhabitants>106</maxInhabitants>
+		<needs>
+			<need id="1">2 Sorten Wein</need>
+		</needs>
+		<wealth>700</wealth>
+	</home>
+	<home>
+		<id>18</id>
+		<name>Mittlerer Palast</name>
+		<sizeX>3</sizeX>
+		<sizeY>3</sizeY>
+		<maxInhabitants>112</maxInhabitants>
+		<needs>
+			<need id="1">4 Götter</need>
+		</needs>
+		<wealth>900</wealth>
+	</home>
+	<home>
+		<id>19</id>
+		<name>Großer Palast</name>
+		<sizeX>4</sizeX>
+		<sizeY>4</sizeY>
+		<maxInhabitants>190</maxInhabitants>
+		<needs>
+			<need id="1">Hippodrom</need>
+		</needs>
+		<wealth>1500</wealth>
+	</home>
+	<home>
+		<id>20</id>
+		<name>Luxus Palast</name>
+		<sizeX>4</sizeX>
+		<sizeY>4</sizeY>
+		<maxInhabitants>200</maxInhabitants>
+		<needs>
+			<need id="1">Alles</need>
+		</needs>
+		<wealth>1750</wealth>
+	</home>
+</homes>
