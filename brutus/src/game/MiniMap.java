@@ -50,6 +50,7 @@ public class MiniMap extends JPanel {
 		super.setSize(size, size);
 	}
 	public void paint(Graphics g){
+		super.paint(g);
 		int screen=getWidth(),xMap = map.length,yMap= map[0].length,offset,xWhite,yWhite;
 		if(xMap>yMap)
 		{

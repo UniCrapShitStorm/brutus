@@ -2,6 +2,7 @@ package mapeditor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -31,6 +32,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileFilter;
 
 import build.Path;
@@ -39,9 +41,9 @@ import build.Track;
 /**
  * Version 3 des Mapeditors,
  * Funktion wie vorher(bis auf Bugfixes), aber in stabilerer und aufgeraeumter Art und Weise
- * @version 3.0
+ * @version 3.1
  * @author tobias
- *	TODO Speichern/Laden wieder einbinen (Liefert Fehler, da Game nicht in einem Package liegt). done...
+ * TODO Geschwindigkeit der beiden privaten Methoden erhöhen(wird ab ca 200x200 zu langsam...)
  */
 public class MapEdit3 extends JFrame {
 
@@ -62,6 +64,8 @@ public class MapEdit3 extends JFrame {
 	private JMenuItem openMItem;
 	private JMenuItem saveAsMItem;
 	private JMenuItem exitMItem;
+	public static final int TILE_SIZE=30;
+	private Point lastTile;
 	
 	/**
 	 * Methode zum Starten des MapEditors
@@ -75,12 +79,14 @@ public class MapEdit3 extends JFrame {
 	public MapEdit3(){
 		super("MapEdit v3");
 		me = this;
+		lastTile = new Point(-1,-1);
+		
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		map = new Field[][] {{new Grass(0, 0)}};
 		super.setSize(550, 450);
 		
 		super.setJMenuBar(getJMenuBar());
-		super.getContentPane().add(getMinimap(),BorderLayout.CENTER);
+		super.getContentPane().add(new JScrollPane(getMinimap()),BorderLayout.CENTER);
 		super.getContentPane().add(getEastPanel(), BorderLayout.EAST);
 		
 	}
@@ -91,54 +97,37 @@ public class MapEdit3 extends JFrame {
 			minimap = new MiniMap(map);
 			minimap.addMouseMotionListener(new MouseMotionListener() {
 				public void mouseMoved(MouseEvent e) {
-					int screen = getMinimap().getWidth(), xMap = map.length,yMap = map[0].length, offset, xWhite, yWhite,xOnMap=e.getX(),yOnMap=e.getY(); 
-					if(xMap>yMap)
-					{
-						offset=screen/xMap;
-						yWhite=(screen-(offset*yMap))/2;
-						xWhite=0;
-					}
-					else if(yMap>xMap)
-					{
-						offset=screen/yMap;
-						xWhite=(screen-(offset*xMap))/2;
-						yWhite=0;
-					}
-					else
-					{
-						offset=screen/xMap;
-						xWhite=0;
-						yWhite=0;
-					}
-					if(xOnMap<xWhite||yOnMap<yWhite||xOnMap>screen-xWhite-1||yOnMap>screen-yWhite-1)
-						return;
-					else
-					{
-						xOnMap -= xWhite;
-						yOnMap-= yWhite;
-						int xPos = xOnMap/offset, yPos = yOnMap/offset;
-						if(xPos>=map.length||yPos>=map[0].length)
-							;
-						else
-							getCoordinatesLabel().setText((xPos+1)+", "+(yPos+1)+" ("+map.length+", "+map[0].length+")");
-					}
+					Point p = getTileCoordinates(e.getX(), e.getY());
+					getCoordinatesLabel().setText((p.x+1)+", "+(p.y+1)+" ("+map.length+", "+map[0].length+")");
 				}
 				public void mouseDragged(MouseEvent e) {
 					if(e.getModifiersEx()==MouseEvent.BUTTON1_DOWN_MASK)
-						updateMap(e.getX(),e.getY());
+					{
+						Point p = getTileCoordinates(e.getX(), e.getY());
+						if(!(p.equals(lastTile))&&p.x!=-1)
+						{
+							lastTile = p;
+							updateMap(p.x,p.y);
+						}
+					}
 				}
 			});
 			minimap.addMouseListener(new MouseListener() {
-				
-				
 				public void mouseReleased(MouseEvent arg0) {}
 				public void mouseClicked(MouseEvent arg0) {}
 				public void mouseExited(MouseEvent arg0) {}
 				public void mouseEntered(MouseEvent arg0) {}
 				public void mousePressed(MouseEvent e) {
 					if(e.getButton()==MouseEvent.BUTTON1)
-						updateMap(e.getX(), e.getY());
+					{
+						Point p = getTileCoordinates(e.getX(), e.getY());
+						if(!(p.equals(lastTile))&&p.x!=-1)
+						{
+							lastTile = p;
+							updateMap(p.x,p.y);
+						}
 					}
+				}
 			});
 			
 		}
@@ -159,7 +148,7 @@ public class MapEdit3 extends JFrame {
 			eastPanel.add(getGebaeudeCombo());
 			eastPanel.add(Box.createVerticalStrut(10));
 			eastPanel.add(getDeleteCheck());
-			eastPanel.add(Box.createGlue());
+			eastPanel.add(Box.createVerticalGlue());
 			eastPanel.add(getCoordinatesLabel());
 		}
 		return eastPanel;
@@ -169,6 +158,10 @@ public class MapEdit3 extends JFrame {
 		if(coordinatesLabel==null)
 		{
 			coordinatesLabel = new JLabel("0, 0");
+			coordinatesLabel.setMaximumSize(new Dimension(110, 25));
+			coordinatesLabel.setMinimumSize(new Dimension(110, 25));
+			coordinatesLabel.setPreferredSize(new Dimension(110, 25));
+			
 		}
 		return coordinatesLabel;
 	}
@@ -206,7 +199,7 @@ public class MapEdit3 extends JFrame {
 		{
 			gebaeudeRadio = new JRadioButton("Gebäude");
 			gebaeudeRadio.setSelected(false);
-			gebaeudeRadio.addActionListener(new ActionListener(){
+			gebaeudeRadio.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 						getUntergrundCombo().setEnabled(false);
 						getGebaeudeCombo().setEnabled(true);
@@ -277,9 +270,10 @@ public class MapEdit3 extends JFrame {
 								map[x][y] = new Grass(x, y);
 							}
 						}
-						minimap.setMap(map);
-						revalidate();
-						repaint();
+						getMinimap().setMap(map);
+						getMinimap().setPreferredSize(new Dimension(TILE_SIZE*Math.max(xLengthN,yLengthN),TILE_SIZE*Math.max(xLengthN,yLengthN)));
+						((JScrollPane)me.getContentPane().getComponent(0)).getViewport().updateUI();
+						me.repaint();
 					}
 					catch (Exception e) {
 						e.printStackTrace();
@@ -296,7 +290,7 @@ public class MapEdit3 extends JFrame {
 			openMItem = new JMenuItem("Öffnen");
 			openMItem.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					JFileChooser load = new JFileChooser(".");
+					JFileChooser load = new JFileChooser("./res/maps");
 					load.setFileFilter(new FileFilter() {
 						public String getDescription() {
 							return "CaesarNet Kartendateien";
@@ -309,8 +303,9 @@ public class MapEdit3 extends JFrame {
 					if(load.getSelectedFile()!=null&&load.getSelectedFile().getName().endsWith(".map")&&load.getSelectedFile().isFile())
 					{
 						map = game.Game.loadMap(load.getSelectedFile().getAbsolutePath());
-						minimap.setMap(map);
-						revalidate();
+						getMinimap().setMap(map);
+						getMinimap().setPreferredSize(new Dimension(TILE_SIZE*map.length,TILE_SIZE*map[0].length));
+						((JScrollPane)me.getContentPane().getComponent(0)).getViewport().updateUI();
 						repaint();
 					}
 				}
@@ -325,7 +320,7 @@ public class MapEdit3 extends JFrame {
 			saveAsMItem = new JMenuItem("Speichern unter");
 			saveAsMItem.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-						JFileChooser save = new JFileChooser(".");
+						JFileChooser save = new JFileChooser("./res/maps");
 						save.setFileFilter(new FileFilter() {
 							public String getDescription() {
 								return "CaesarNet Kartendateien";
@@ -357,8 +352,14 @@ public class MapEdit3 extends JFrame {
 		}
 		return exitMItem;
 	}
-	
-	private void updateMap(int xOnMap,int yOnMap){
+	/**
+	 * Wandelt Bildschirmkoordinaten in Karten(Array-)Koordinaten um.
+	 * @param xOnMap
+	 * @param yOnMap
+	 * @return
+	 */
+	private Point getTileCoordinates(int xOnMap,int yOnMap)
+	{
 		int screen = getMinimap().getWidth(), xMap = map.length,yMap = map[0].length, offset, xWhite, yWhite; 
 		if(xMap>yMap)
 		{
@@ -379,45 +380,52 @@ public class MapEdit3 extends JFrame {
 			yWhite=0;
 		}
 		if(xOnMap<xWhite||yOnMap<yWhite||xOnMap>screen-xWhite-1||yOnMap>screen-yWhite-1)
-			return;
+			return new Point(-1,-1);
 		else
 		{
 			xOnMap -= xWhite;
 			yOnMap-= yWhite;
 			int xPos = xOnMap/offset, yPos = yOnMap/offset;
 			if(xPos>=map.length||yPos>=map[0].length)
-				return;
-			
-			if (getUntergrundRadio().isSelected()) {
-				Field f = map[xPos][yPos];
-				switch(getUntergrundCombo().getSelectedIndex()){
-				case 0: if(!(f instanceof Desert)) f = new Desert(xPos, yPos); break;
-				case 1: if(!(f instanceof Grass)) f = new Grass(xPos, yPos); break;
-				case 2: if(!(f instanceof Iron)) f = new Iron(xPos, yPos); break;
-				case 3: if(!(f instanceof Marble)) f = new Marble(xPos, yPos); break;
-				case 4: if(!(f instanceof Stones)) f = new Stones(xPos, yPos); break;
-				case 5: if(!(f instanceof Water)) f = new Water(xPos, yPos); break;
-				case 6: if(!(f instanceof Wheat)) f = new Wheat(xPos, yPos); break;
-				}
-				map[xPos][yPos]=f;
-			
-			}else{
-				if(map[xPos][yPos].istBebaubar())
+				return new Point(-1,-1);
+			return new Point(xPos,yPos);
+		}	
+	}
+	/**
+	 * Verändert an einer gegebenen Stelle die Karte (nach den Einstellungen im rechten Bereich)
+	 * @param xTile Position des Feldes (1. []-Dimension)
+	 * @param yTile Position des Feldes (2. []-Dimension)
+	 */
+	private void updateMap(int xTile,int yTile){
+		if (getUntergrundRadio().isSelected())
+		{
+			Field f = map[xTile][yTile];
+			switch(getUntergrundCombo().getSelectedIndex()){
+			case 0: if(!(f instanceof Desert)) f = new Desert(xTile, yTile); break;
+			case 1: if(!(f instanceof Grass)) f = new Grass(xTile, yTile); break;
+			case 2: if(!(f instanceof Iron)) f = new Iron(xTile, yTile); break;
+			case 3: if(!(f instanceof Marble)) f = new Marble(xTile, yTile); break;
+			case 4: if(!(f instanceof Stones)) f = new Stones(xTile, yTile); break;
+			case 5: if(!(f instanceof Water)) f = new Water(xTile, yTile); break;
+			case 6: if(!(f instanceof Wheat)) f = new Wheat(xTile, yTile); break;
+			}
+			map[xTile][yTile]=f;
+		
+		}
+		else
+		{
+			if(map[xTile][yTile].istBebaubar())
+			{
+				if (getDeleteCheck().isSelected())
 				{
-					if (getDeleteCheck().isSelected())
-					{
-						map[xPos][yPos].removeBuilding();
-					}
-					else if(!(map[xPos][yPos].getBuilding() instanceof Path))
-					{
-						map[xPos][yPos].setBuilding(new Track(map[xPos][yPos]));	
-					}
-				//TODO fertig machen (iwer) <- Was denn??? Tobias
+					map[xTile][yTile].removeBuilding();
+				}
+				else if(!(map[xTile][yTile].getBuilding() instanceof Path))
+				{
+					map[xTile][yTile].setBuilding(new Track(map[xTile][yTile]));
 				}
 			}
-
 		}
 		repaint();
-	
 	}
 }
