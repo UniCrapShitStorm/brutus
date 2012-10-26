@@ -3,6 +3,7 @@
 	<name>src-Tobi-4</name>
 	<comment></comment>
 	<projects>
+		<project>JOGL</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
