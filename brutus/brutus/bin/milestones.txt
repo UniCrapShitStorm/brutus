@@ -1,0 +1,3 @@
+- Karten (Field[][]) können dank Serializable gespeichert werden
+- einfacher karteneditor zum testen kleiner karten fertig
+	(mit kleinen fehlern/exceptions) 

@@ -1,0 +1,7 @@
+package buildings;
+
+public class Homes extends HomesRaw {
+	Homes() {
+		super(name, sizeX, sizeY, id, maxInhabitants, wealth, needs);
+	}
+}

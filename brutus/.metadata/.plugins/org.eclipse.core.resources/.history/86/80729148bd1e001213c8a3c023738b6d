@@ -1,0 +1,87 @@
+package buildings;
+
+public class Homes extends HomesRaw {	
+	private int inhabitants;
+	private boolean burning;
+	
+	Homes(HomesRaw h, int inhabitants) {
+		super(h.getName(), h.getSizeX(), h.getSizeY(), h.getId(), h.getMaxInhabitants(), h.getWealth(), h.getNeeds());
+		
+		this.burning = false;
+		this.inhabitants = inhabitants;
+	}	
+
+	public LargeCasa(Field place,int startCivilians) {
+		super(place,startCivilians);
+	}
+	
+	public boolean setInhabitantsCount(int count) {
+		if(count > MAX_CIVS)
+			return false;
+		else
+		civilians = count;
+		return true;
+	}
+	
+	public boolean isBurning() {
+		return burning;
+	}
+
+	public int getWealth() {
+		return WEALTH;
+	}
+
+	public int updateCriminality(Field[][] map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateIllnessFactor(Field[][] map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateDishes(int d) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateFurniture(int f) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateOil(int o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateVine(int v) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updatePopularity(Field[][] map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateEntertainment(Field[][] map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateReligion(Field[][] map, God[] g) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public boolean isReadyToRise() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setBurning(boolean b) {
+		// TODO Auto-generated method stub
+	}
+}
