@@ -11,12 +11,15 @@ import ground.Wheat;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.MouseListener;
 import java.nio.FloatBuffer;
 
 import javax.swing.JPanel;
 import javax.media.opengl.*;
 import javax.media.opengl.awt.*;
 //import javax.media.opengl.glu.*;
+
+import normal.PlayingField;
 
 public class NGLManager implements GLEventListener
 {
@@ -30,6 +33,8 @@ public class NGLManager implements GLEventListener
 	public float camx = 0.0f;
 	public float camy = 0.0f;
 	
+	public float pixelsize = 100.0f;
+	
 	public NGLManager(JPanel frame)
 	{
 		GLProfile glp = GLProfile.getDefault();
@@ -38,6 +43,56 @@ public class NGLManager implements GLEventListener
         frame.setLayout(new BorderLayout());
         frame.add(canvas, BorderLayout.CENTER);
         canvas.addGLEventListener(this);
+        
+        canvas.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent m) {
+				canvas.requestFocus();
+				int but = m.getButton();
+				if(but==1){
+					System.out.println("x: "+m.getX());
+					System.out.println("y: "+m.getY()+"\n");
+					int [] cornerarray ={m.getX(),m.getY()};
+					PlayingField.actualPosition(m.getX(), m.getY());
+					int xmap = (int) (cornerarray[0]/pixelsize);
+					int ymap = (int) (cornerarray[1]/pixelsize);
+//					if(baumode==true){
+//						//paintBuildings(playField.g);
+//						playField.repaint();
+//					}
+//				}
+//				if (but==3){
+//					baumode=false;
+				}
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent m) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent m) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent m) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent m) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+		});
 	}
 	
 	public void render(GLAutoDrawable drawable)
