@@ -13,14 +13,15 @@ public class NGLShader
 	
 	public int shadid = 0;
 	
-	
+	public NGLShader(String shadfile, GL2 gl)
+	{
+		create(shadfile, gl);
+	}
 	
 	public boolean compileShader(int shader[], int type, String shadfile, GL2 gl)
 	{
 		int status[] = new int[1];
 		String source;
-
-		
 		
 		BufferedReader vert_reader;
 		try
@@ -53,25 +54,22 @@ public class NGLShader
         vlen[0] = vshader[0].length();
 
 		shader[0] = gl.glCreateShader(type);
-		glShaderSource(shader[0], 1, &source, vlen[0]);
-		glCompileShader(*shader);
+		gl.glShaderSource(shader[0], 1, vshader, vlen, 1);
+		gl.glCompileShader(shader[0]);
 
-		delete[] source;
-
-		GLint logLength;
-		glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &logLength);
-		if(logLength > 0)
+		int logLength[] = new int[1];
+		gl.glGetShaderiv(shader[0], GL2.GL_INFO_LOG_LENGTH, logLength, 1);
+		if(logLength[0] > 0)
 		{
-			GLchar *log = (GLchar *)malloc(logLength);
-			glGetShaderInfoLog(*shader, logLength, &logLength, log);
-			sgLog("%s: Shader compile log:\n %s", filepath, log);
-			free(log);
+//			GLchar *log = (GLchar *)malloc(logLength);
+//			glGetShaderInfoLog(*shader, logLength, &logLength, log);
+//			sgLog("%s: Shader compile log:\n %s", filepath, log);
 		}
 
-		glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
-		if(status == 0)
+		gl.glGetShaderiv(shader[0], GL2.GL_COMPILE_STATUS, status, 1);
+		if(status[0] == 0)
 		{
-			glDeleteShader(*shader);
+			gl.glDeleteShader(shader[0]);
 			return false;
 		}
 
@@ -119,7 +117,6 @@ public class NGLShader
 		return true;
 	}
 	
-	
 	public boolean create(String shadfile, GL2 gl)
 	{
 		if(shadid != 0)
@@ -132,14 +129,14 @@ public class NGLShader
 		shadid = gl.glCreateProgram();
 
 		// Create and compile vertex shader
-		if(!compileShader(vertShader, GL2.GL_VERTEX_SHADER, shadfile))
+		if(!compileShader(vertShader, GL2.GL_VERTEX_SHADER, shadfile, gl))
 		{
 			System.out.println(shadfile + ": Failed to compile vertex shader");
 			return false;
 		}
 
 		// Create and compile fragment shader
-		if(!compileShader(fragShader, GL2.GL_FRAGMENT_SHADER, shadfile))
+		if(!compileShader(fragShader, GL2.GL_FRAGMENT_SHADER, shadfile, gl))
 		{
 			System.out.println(shadfile + ": Failed to compile fragment shader");
 			return false;
@@ -152,7 +149,7 @@ public class NGLShader
 		gl.glAttachShader(shadid, fragShader[0]);
 
 		// Link program
-		if(!linkProgram(shadid))
+		if(!linkProgram(shadid, gl))
 		{
 			System.out.println("Failed to link program" + shadid);
 
@@ -191,8 +188,6 @@ public class NGLShader
 		return true;
 	}
 	
-	
-	
 	static public NGLShader getShader(String shadfile, GL2 gl)
 	{
 		if(shadlist == null)
@@ -203,8 +198,8 @@ public class NGLShader
 			return shadlist.get(shadfile);
 		}
 		
-		NGLTexture tex = new NGLTexture(shadfile, gl);
-		shadlist.put(shadfile, tex);
-		return tex;
+		NGLShader shad = new NGLShader(shadfile, gl);
+		shadlist.put(shadfile, shad);
+		return shad;
 	}
 }
