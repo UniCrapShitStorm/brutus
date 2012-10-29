@@ -1,7 +1,0 @@
-package buildings;
-
-public class Buildings extends BuildingsRaw {
-	public Buildings(BuildingsRaw b) {
-		super(b.getName(), b.getSizeX(), b.getSizeY(), b.needsStreet(), b.getInitAttr(), b.getPlusAttr(), b.getStepAttr(), b.getMaxAttrRegion()));
-	}
-}
