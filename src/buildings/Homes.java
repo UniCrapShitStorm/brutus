@@ -3,10 +3,10 @@ package buildings;
 import game.God;
 import ground.Field;
 
-public class Homes extends HomesRaw {	
-	private Field place;
+public class Homes extends HomesRaw {
 	private int inhabitants;
 	private boolean burning;
+	private Field place;
 	
 	/**
 	 * Konstruktor zur Instanzierung eines Wohngebaudes
@@ -17,17 +17,9 @@ public class Homes extends HomesRaw {
 	Homes(HomesRaw h, Field place, int inhabitants) {
 		super(h.getName(), h.getSizeX(), h.getSizeY(), h.getId(), h.getMaxInhabitants(), h.getWealth(), h.getNeeds());
 
-		this.place = place;
 		this.inhabitants = inhabitants;
 		this.burning = false;
-	}
-	
-	/**
-	 * liefert den Platz, auf dem das Wohnhaus steht, zurueck
-	 * @return Platz, an dem das Wohnhaus steht
-	 */
-	public Field getField() {
-		return place;
+		this.place = place;
 	}
 	
 	/**

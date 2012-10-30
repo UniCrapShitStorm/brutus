@@ -5,26 +5,8 @@ import ground.Field;
 import ground.Grass;
 import ground.Marble;
 import ground.Water;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import javax.imageio.*;
-import java.awt.image.*;
-
 import javax.swing.*;
-
-import org.w3c.dom.events.MouseEvent;
-
-import build.Production;
-
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 public class SwingGui extends javax.swing.JFrame{
 

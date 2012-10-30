@@ -6,7 +6,7 @@ import java.util.List;
 
 import mobile.Mobile;
 
-import build.Building;
+import buildings.Building;
 
 
 /**
@@ -30,7 +30,7 @@ public abstract class Field implements Serializable{
 	private List<Mobile> moveables=null;
 	
 	/**
-	 * Konsttruktor I
+	 * Konstruktor I
 	 * Standardfeldgroesse: 1 x 1
 	 * @param xPos Die absolute X Position auf dem Spielfeld
 	 * @param yPos Die absolute Y Position auf dem Spielfeld
@@ -41,7 +41,7 @@ public abstract class Field implements Serializable{
 		this.yPos=yPos;
 	}
 	/**
-	 * Konsttruktor II
+	 * Konstruktor II
 	 * Eigene Feldgroesse
 	 * @param xPos Die absolute X Position auf dem Spielfeld
 	 * @param yPos Die absolute Y Position auf dem Spielfeld
@@ -68,8 +68,8 @@ public abstract class Field implements Serializable{
 		this.yPos=yPos;
 		if(b!=null)
 		{
-			this.xSize=b.getXSize();
-			this.ySize=b.getYSize();
+			this.xSize=b.getSizeX();
+			this.ySize=b.getSizeY();
 			this.hereStands=b;
 		}
 		else
@@ -106,7 +106,7 @@ public abstract class Field implements Serializable{
 	 * @return passt das Gebaeude?
 	 */
 	public boolean setBuilding(Building b){
-		if(xSize!=b.getXSize()||ySize!=b.getYSize())
+		if(xSize!=b.getSizeX()||ySize!=b.getSizeY())
 			return false;
 		hereStands=b;
 		return true;
@@ -168,6 +168,4 @@ public abstract class Field implements Serializable{
 	public void removeAllMoveables(){
 		moveables = new LinkedList<Mobile>();
 	}
-	
-	
 }

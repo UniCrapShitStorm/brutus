@@ -1,6 +1,6 @@
 package ground;
 
-import build.Building;
+import buildings.Building;
 
 public class Marble extends Field {
 

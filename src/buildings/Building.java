@@ -1,9 +1,10 @@
 package buildings;
+import ground.Field;
 
 public abstract class Building {
-	private String name;
-	private  int sizeX;
-	private  int sizeY;
+	private final String name;
+	private final int sizeX;
+	private final int sizeY;
 	
 	Building(String name, int sizeX, int sizeY) {
 		this.name = name;
