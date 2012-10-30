@@ -1,18 +1,17 @@
 package buildings;
 
-import ground.Field;
-
-public class BuildingsRaw extends Building {
+public class OtherBuildings extends Buildings {
 	private boolean needsStreet;
 	private int initAttr;
 	private int plusAttr;
 	private int stepAttr;
 	private int maxAttrRegion;
+	private int attraction;
 	private int maxWorkers;
 	private int costs;
 
-	public BuildingsRaw(String name, int sizeX, int sizeY, boolean needsStreet, 
-			int initAttr, int plusAttr, int stepAttr, int maxAttrRegion, 
+	public OtherBuildings(String name, int sizeX, int sizeY, boolean needsStreet, 
+			int initAttr, int plusAttr, int stepAttr, int maxAttrRegion, int attraction,
 			int maxWorkers, int costs) {
 		super(name, sizeX, sizeY);
 		this.needsStreet = needsStreet;
@@ -20,19 +19,7 @@ public class BuildingsRaw extends Building {
 		this.plusAttr = plusAttr;
 		this.stepAttr = stepAttr;
 		this.maxAttrRegion = maxAttrRegion;
-		this.maxWorkers = maxWorkers;
-		this.costs = costs;
-	}
-	
-	public BuildingsRaw(Building b, boolean needsStreet, int initAttr, 
-			int plusAttr, int stepAttr,	int maxAttrRegion, int maxWorkers,
-			int costs) {
-		super(b.getName(), b.getSizeX(), b.getSizeY());
-		this.needsStreet = needsStreet;
-		this.initAttr = initAttr;
-		this.plusAttr = plusAttr;
-		this.stepAttr = stepAttr;
-		this.maxAttrRegion = maxAttrRegion;
+		this.attraction = attraction;
 		this.maxWorkers = maxWorkers;
 		this.costs = costs;
 	}
@@ -75,6 +62,14 @@ public class BuildingsRaw extends Building {
 	 */
 	public int getMaxAttrRegion() {
 		return maxAttrRegion;
+	}
+	
+	/**
+	 * liefert zurück, TODO
+	 * @return needsStreet TODO
+	 */
+	public int getAttraction() {
+		return attraction;
 	}
 
 	/**

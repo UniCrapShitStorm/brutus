@@ -1,21 +1,28 @@
 package xml;
 
 import java.util.*;
+
 import org.jdom2.*;
 import org.jdom2.input.*;
-
-import buildings.BuildingsRaw;
+import buildings.OtherBuildings;
 //import org.jdom2.output.*;
 import java.io.*;
 
 public class ReadBuildings {
-	public static ArrayList<BuildingsRaw> buildings = new ArrayList<BuildingsRaw>();
+	public ArrayList<OtherBuildings> buildings = new ArrayList<OtherBuildings>();
 
 	/**
-	 * Liest alle Nutzgebaeude aus einer XML-Datei und speichert sie in einer ArrayList<Buildings>
+	 * wird eine Instanz der Klasse ReadBuildings erstellt, wird automatisch im Konstruktor die entsprechende XML-Datei eingelesen
+	 */
+	ReadBuildings() {
+		buildings = getBuildingsFromXml();
+	}
+	
+	/**
+	 * Liest alle Nutzgebaeude aus einer XML-Datei und speichert sie in einer ArrayList<OtherBuildings>
 	 * @return alle Nutzgebaeude in einer ArrayList
 	 */
-	public static ArrayList<BuildingsRaw> getBuildingsFromXml() {
+	public ArrayList<OtherBuildings> getBuildingsFromXml() {
 
 		SAXBuilder builder = new SAXBuilder();
 //		XMLOutputter out = new XMLOutputter();
@@ -44,7 +51,7 @@ public class ReadBuildings {
 			int maxWorkers = Integer.parseInt(building.getChildText("maxWorkers"));
 			int costs = Integer.parseInt(building.getChildText("costs"));
 
-			BuildingsRaw buildingsWithValues = new BuildingsRaw(name, sizeX, sizeY, needsStreet, initAttr, plusAttr, stepAttr, maxAttrRegion, maxWorkers, costs);
+			OtherBuildings buildingsWithValues = new OtherBuildings(name, sizeX, sizeY, needsStreet, initAttr, plusAttr, stepAttr, maxAttrRegion, 0, maxWorkers, costs);
 			buildings.add(buildingsWithValues);
 		}
 
@@ -53,6 +60,14 @@ public class ReadBuildings {
 //			System.out.print(b.getName() + "\t" + b.getSizeX() + "x" + b.getSizeY() + "\t" + b.needsStreet() + "\t" + b.getInitAttr() + "\t" + b.getPlusAttr() + "\t" + b.getStepAttr() + "\t" + b.getMaxAttrRegion() + "\t" + b.getMaxWorkers() + "\t" + b.getCosts() + "\n");
 //		}
 		
+		return buildings;
+	}
+	
+	/**
+	 * liefert die anderen Gebaude als ArrayList<OtherBuildings> zurueck
+	 * @return ArrayList der anderen Gebaude
+	 */
+	public ArrayList<OtherBuildings> getBuildingsList() {
 		return buildings;
 	}
 }

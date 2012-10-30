@@ -6,7 +6,7 @@ import java.util.List;
 
 import mobile.Mobile;
 
-import buildings.Building;
+import buildings.Buildings;
 
 
 /**
@@ -25,7 +25,7 @@ public abstract class Field implements Serializable{
 	private final int xPos,yPos;
 	private int xSize=1,ySize=1;
 	
-	private Building hereStands=null;
+	private Buildings hereStands=null;
 		
 	private List<Mobile> moveables=null;
 	
@@ -62,7 +62,7 @@ public abstract class Field implements Serializable{
 	 * @param yPos Die absolute Y Position auf dem Spielfeld
 	 * @param b Das auf dem Feld zu bauende Gebaeude.
 	 */
-	public Field(int xPos,int yPos,Building b){
+	public Field(int xPos,int yPos,Buildings b){
 		moveables = new LinkedList<Mobile>();
 		this.xPos=xPos;
 		this.yPos=yPos;
@@ -97,7 +97,7 @@ public abstract class Field implements Serializable{
 	public int getYPos() {
 		return yPos;
 	}
-	public Building getBuilding() {
+	public Buildings getBuilding() {
 		return hereStands;
 	}
 	/**
@@ -105,7 +105,7 @@ public abstract class Field implements Serializable{
 	 * @param b das zu bauende Gebaeude
 	 * @return passt das Gebaeude?
 	 */
-	public boolean setBuilding(Building b){
+	public boolean setBuilding(Buildings b){
 		if(xSize!=b.getSizeX()||ySize!=b.getSizeY())
 			return false;
 		hereStands=b;
@@ -116,13 +116,13 @@ public abstract class Field implements Serializable{
 	 * @param b das zu pruefende Gebaeude
 	 * @return passt es?
 	 */
-	abstract public boolean isBuildingCompatible(Building b);
+	abstract public boolean isBuildingCompatible(Buildings b);
 	
 	/**
 	 * @return Wurde das Gebaeude geloescht?
 	 */
-	public Building removeBuilding(){
-		Building b = hereStands;
+	public Buildings removeBuilding(){
+		Buildings b = hereStands;
 		hereStands=null;
 		return b;
 	}

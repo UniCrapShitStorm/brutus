@@ -1,6 +1,6 @@
 package ground;
 
-import buildings.Building;
+import buildings.Buildings;
 
 public class Iron extends Field {
 
@@ -10,13 +10,13 @@ public class Iron extends Field {
 	}
 
 	
-	public boolean setBuilding(Building b){
+	public boolean setBuilding(Buildings b){
 		return false;
 	}
-	public boolean isBuildingCompatible(Building b){
+	public boolean isBuildingCompatible(Buildings b){
 		return false;
 	}
-	public Building removeBuilding(){
+	public Buildings removeBuilding(){
 		return null;
 	}
 	public boolean istBebaubar(){

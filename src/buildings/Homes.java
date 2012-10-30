@@ -2,24 +2,68 @@ package buildings;
 
 import game.God;
 import ground.Field;
+import java.util.ArrayList;
 
-public class Homes extends HomesRaw {
+public class Homes extends Buildings {
+	private int id;
+	private int maxInhabitants;
 	private int inhabitants;
 	private boolean burning;
-	private Field place;
+	private int wealth;
+	private ArrayList<String> needs;
 	
-	/**
-	 * Konstruktor zur Instanzierung eines Wohngebaudes
-	 * @param h Wohngebaude-Rohling, der hier weiter spezifiziert wird
-	 * @param place Platz, an dem das Gebaude steht
-	 * @param inhabitants aktuelle Einwohnerzahl
-	 */
-	Homes(HomesRaw h, Field place, int inhabitants) {
-		super(h.getName(), h.getSizeX(), h.getSizeY(), h.getId(), h.getMaxInhabitants(), h.getWealth(), h.getNeeds());
+	public Homes(String name, int sizeX, int sizeY, int id, int maxInhabitants,
+			int wealth, ArrayList<String> needs, int inhabitants) {
+		super(name, sizeX, sizeY);
 
+		this.id = id;
+		this.maxInhabitants = maxInhabitants;
+		this.wealth = wealth;
+		this.needs = needs;
 		this.inhabitants = inhabitants;
 		this.burning = false;
-		this.place = place;
+	}
+
+
+	/**
+	 * liefert die ID des Wohnhauses zurück
+	 * @return id ID des Wohnhauses
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * liefert die aktuelle Einwohnerzahl eines Wohnhauses zurueck
+	 * @return aktuelle Einwohnerzahl
+	 */
+	public int getInhabitants() {
+		return inhabitants;
+	}
+
+	/**
+	 * liefert die maximalen Einwohner des Wohnhauses zurück
+	 * @return maxInhabitants maximale Einwohner des Wohnhauses
+	 */
+	public int getMaxInhabitants() {
+		return maxInhabitants;
+	}
+
+
+	/**
+	 * liefert den Wohlstand des Wohnhauses zurück
+	 * @return wealth Wohlstand des Wohnhauses
+	 */
+	public int getWealth() {
+		return wealth;
+	}
+
+	/**
+	 * liefert die Bedürfnisse des Wohnhauses zurück
+	 * @return needs Bedürfnisse des Wohnhauses
+	 */
+	public ArrayList<String> getNeeds() {
+		return needs;
 	}
 	
 	/**

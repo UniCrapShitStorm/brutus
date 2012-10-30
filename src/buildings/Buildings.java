@@ -1,14 +1,47 @@
 package buildings;
-
 import ground.Field;
 
-public class Buildings extends BuildingsRaw {
+public abstract class Buildings {
+	private final String name;
+	private final int sizeX;
+	private final int sizeY;
 	private Field place;
-	private int attraction;
 	
-	public Buildings(BuildingsRaw b, Field place, int attraction) {
-		super(b.getName(), b.getSizeX(), b.getSizeY(), b.needsStreet(), b.getInitAttr(), b.getPlusAttr(), b.getStepAttr(), b.getMaxAttrRegion(), b.getMaxWorkers(), b.getCosts());
-		this.place = place;
-		this.attraction = attraction;
+	Buildings(String name, int sizeX, int sizeY) {
+		this.name = name;
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
+	}
+	
+	/**
+	 * liefert den Namen des Gebäudes zurück
+	 * @return Name des Gebäudes
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * liefert die X-Größe des Gebäudes zurück
+	 * @return X-Größe des Gebäudes
+	 */
+	public int getSizeX() {
+		return sizeX;
+	}
+	
+	/**
+	 * liefert die Y-Größe des Gebäudes zurück
+	 * @return Y-Größe des Gebäudes
+	 */
+	public int getSizeY() {
+		return sizeY;
+	}
+	
+	/**
+	 * liefert das Feld / den Platz, auf dem es steht zurück
+	 * @return Feld des Gebaudes
+	 */
+	public Field getPlace() {
+		return place;
 	}
 }

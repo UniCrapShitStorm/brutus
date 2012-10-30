@@ -5,19 +5,26 @@ import java.util.*;
 import org.jdom2.*;
 import org.jdom2.input.*;
 
-import buildings.HomesRaw;
+import buildings.Homes;
 //import org.jdom2.output.*;
 
 import java.io.*;
 
 public class ReadHomes {
-	public static ArrayList<HomesRaw> homes = new ArrayList<HomesRaw>();
+	public ArrayList<Homes> homes = new ArrayList<Homes>();
+	
+	/**
+	 * wird eine Instanz der Klasse ReadHomes erstellt, wird automatisch im Konstruktor die entsprechende XML-Datei eingelesen
+	 */
+	ReadHomes() {
+		homes = getHomesFromXml();
+	}
 	
 	/**
 	 * Liest alle Wohnhaeuser aus einer XML-Datei und speichert sie in einer ArrayList<Homes>
 	 * @return alle Wohnhaeuser in einer ArrayList
 	 */
-	public static ArrayList<HomesRaw> getHomesFromXml() {
+	public ArrayList<Homes> getHomesFromXml() {
 
 		SAXBuilder builder = new SAXBuilder();
 //		XMLOutputter out = new XMLOutputter();
@@ -57,7 +64,7 @@ public class ReadHomes {
 				}
 			}
 
-			HomesRaw homeWithValues = new HomesRaw(name, sizeX, sizeY, id, maxInhabitants, wealth, needs);
+			Homes homeWithValues = new Homes(name, sizeX, sizeY, id, maxInhabitants, wealth, needs, 0);
 			homes.add(homeWithValues);
 		}
 		
@@ -66,6 +73,14 @@ public class ReadHomes {
 //			System.out.print(h.getId() + "\t" + h.getName() + "\t\t" + h.getSizeX() + "x" + h.getSizeY() + "\t" + h.getMaxInhabitants() + "\t" + h.getWealth() + "\t" + h.getNeeds().toString() + "\n");
 //		}
 		
+		return homes;
+	}
+	
+	/**
+	 * liefert die Wohnhauser als ArrayList<Homes> zurueck
+	 * @return ArrayList der Wohnhauser
+	 */
+	public ArrayList<Homes> getHomeList() {
 		return homes;
 	}
 }
